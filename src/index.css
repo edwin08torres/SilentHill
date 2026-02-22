@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap");
+@import "tailwindcss";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #030303;
+  color: #fff;
+  font-family: "Cinzel", Georgia, serif;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@keyframes preloader-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes siren-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 40px 8px rgba(120, 0, 0, 0),
+      0 0 80px 20px rgba(80, 0, 0, 0);
+    opacity: 0.5;
+  }
+  50% {
+    box-shadow:
+      0 0 40px 8px rgba(120, 0, 0, 0.15),
+      0 0 80px 20px rgba(80, 0, 0, 0.08);
+    opacity: 1;
+  }
+}
+
+@keyframes fog-drift {
+  0% {
+    transform: translateX(-5%) translateZ(0);
+  }
+  50% {
+    transform: translateX(5%) translateZ(0);
+  }
+  100% {
+    transform: translateX(-5%) translateZ(0);
+  }
+}
+
+@keyframes fog-drift-reverse {
+  0% {
+    transform: translateX(5%) translateZ(0);
+  }
+  50% {
+    transform: translateX(-5%) translateZ(0);
+  }
+  100% {
+    transform: translateX(5%) translateZ(0);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  55% {
+    opacity: 0.15;
+  }
+  56% {
+    opacity: 0.42;
+  }
+}
