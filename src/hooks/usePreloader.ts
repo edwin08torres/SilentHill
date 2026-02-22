@@ -1,15 +1,12 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function usePreloader() {
     const preloaderRef = useRef<HTMLDivElement>(null);
     const heroTitleRef = useRef<HTMLHeadingElement>(null);
-    const [splineLoaded, setSplineLoaded] = useState(false);
 
     useEffect(() => {
-        if (!splineLoaded) return;
-
         const timer = setTimeout(() => {
             gsap.to(preloaderRef.current, {
                 opacity: 0,
@@ -26,10 +23,10 @@ export function usePreloader() {
                     ScrollTrigger.refresh();
                 },
             });
-        }, 800);
+        }, 2000);
 
         return () => clearTimeout(timer);
-    }, [splineLoaded]);
+    }, []);
 
-    return { preloaderRef, heroTitleRef, splineLoaded, setSplineLoaded };
+    return { preloaderRef, heroTitleRef };
 }

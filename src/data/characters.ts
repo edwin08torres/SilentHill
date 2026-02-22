@@ -9,25 +9,25 @@ export const characters: Character[] = [
     {
         name: "James Sunderland",
         role: "Protagonista",
-        image: "/James.png",
+        image: "/James.webp",
         description: "Buscando una carta que no debería existir.",
     },
     {
         name: "Maria",
         role: "La ilusión",
-        image: "/Maria.png",
+        image: "/Maria.webp",
         description: "Nacida de la niebla y un deseo oscuro.",
     },
     {
         name: "Angela Orosco",
         role: "Fugitiva",
-        image: "/Angela.png",
+        image: "/Angela.webp",
         description: "Para mí, siempre es como si estuviera ardiendo.",
     },
     {
         name: "Pyramid Head",
         role: "El castigador",
-        image: "/RedPiramed.png",
+        image: "/RedPiramed.webp",
         description: "El castigador nacido de la culpa.",
     },
 ];

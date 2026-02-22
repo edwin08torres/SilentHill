@@ -1,4 +1,7 @@
-import { useRef } from "react";
+import { useRef, useLayoutEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import { usePreloader } from "./hooks/usePreloader";
 import { useHorizontalScroll } from "./hooks/useHorizontalScroll";
 import { useCustomCursor } from "./hooks/useCustomCursor";
@@ -7,24 +10,32 @@ import { CharacterGrid } from "./sections/CharacterGrid";
 import { HorizontalScroll } from "./sections/HorizontalScroll";
 import { FooterSection } from "./sections/FooterSection";
 
+gsap.registerPlugin(ScrollTrigger);
+
 function App() {
   const tintaVideoRef = useRef<HTMLVideoElement>(null);
-  const splineContainerRef = useRef<HTMLDivElement>(null);
 
-  const { preloaderRef, heroTitleRef, splineLoaded, setSplineLoaded } =
-    usePreloader();
-  const { containerRef, trackRef } = useHorizontalScroll({
-    tintaVideoRef,
-    splineContainerRef,
-  });
+  const { preloaderRef, heroTitleRef } = usePreloader();
+  const { containerRef, trackRef } = useHorizontalScroll({ tintaVideoRef });
   const { cursorRef } = useCustomCursor();
+
+  useLayoutEffect(() => {
+    const lenis = new Lenis();
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   return (
     <div
       className="overflow-x-hidden bg-[#030303] text-white cursor-none"
       style={{ fontFamily: "'Cinzel', Georgia, serif" }}
     >
-      {/* Preloader */}
       <div
         ref={preloaderRef}
         className="fixed inset-0 z-999 bg-[#030303] flex flex-col items-center justify-center pointer-events-none"
@@ -44,25 +55,21 @@ function App() {
         </div>
       </div>
 
-      {/* Custom Cursor */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-8 h-8 bg-white rounded-full pointer-events-none z-100 mix-blend-difference"
+        className="fixed top-0 left-0 w-8 h-8 bg-white rounded-full pointer-events-none z-100"
       />
 
-      {/* Fixed Atmosphere Layers */}
       <video
         src="/humo.mp4"
         autoPlay
         loop
         muted
         playsInline
-        className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none opacity-30 mix-blend-screen grayscale z-50 transform-gpu translate-z-0 will-change-transform"
+        className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none opacity-15 z-50"
       />
       <div className="fixed inset-0 z-40 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.9)_100%)]" />
-      <div className="noise-overlay fixed inset-0 z-41 pointer-events-none mix-blend-overlay opacity-[0.03] transform-gpu translate-z-0" />
 
-      {/* Sections */}
       <IntroSection />
       <CharacterGrid />
       <HorizontalScroll
@@ -70,9 +77,6 @@ function App() {
         trackRef={trackRef}
         heroTitleRef={heroTitleRef}
         tintaVideoRef={tintaVideoRef}
-        splineContainerRef={splineContainerRef}
-        splineLoaded={splineLoaded}
-        setSplineLoaded={setSplineLoaded}
       />
       <FooterSection />
     </div>

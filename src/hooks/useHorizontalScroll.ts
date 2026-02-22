@@ -6,10 +6,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface HorizontalScrollRefs {
     tintaVideoRef: React.RefObject<HTMLVideoElement | null>;
-    splineContainerRef: React.RefObject<HTMLDivElement | null>;
 }
 
-export function useHorizontalScroll({ tintaVideoRef, splineContainerRef }: HorizontalScrollRefs) {
+export function useHorizontalScroll({ tintaVideoRef }: HorizontalScrollRefs) {
     const containerRef = useRef<HTMLDivElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +24,7 @@ export function useHorizontalScroll({ tintaVideoRef, splineContainerRef }: Horiz
                 scrollTrigger: {
                     trigger: container,
                     pin: true,
-                    scrub: 1,
+                    scrub: 0.3,
                     end: () => "+=" + (track.scrollWidth - window.innerWidth),
                     invalidateOnRefresh: true,
                 },
@@ -66,19 +65,6 @@ export function useHorizontalScroll({ tintaVideoRef, splineContainerRef }: Horiz
                 onLeaveBack: () => {
                     tintaVideoRef.current?.pause();
                     gsap.set(tintaVideoRef.current, { autoAlpha: 0 });
-                },
-            });
-
-            ScrollTrigger.create({
-                trigger: ".seccion-hero",
-                containerAnimation: horizontalTween,
-                start: "left left",
-                end: "right left",
-                onLeave: () => {
-                    gsap.set(splineContainerRef.current, { opacity: 0 });
-                },
-                onEnterBack: () => {
-                    gsap.set(splineContainerRef.current, { opacity: 1 });
                 },
             });
         }, container);
