@@ -16,6 +16,7 @@ export function useHorizontalScroll({ tintaVideoRef }: HorizontalScrollRefs) {
         const track = trackRef.current;
         const container = containerRef.current;
         if (!track || !container) return;
+        if (window.innerWidth < 768) return;
 
         const ctx = gsap.context(() => {
             const horizontalTween = gsap.to(track, {
@@ -27,6 +28,7 @@ export function useHorizontalScroll({ tintaVideoRef }: HorizontalScrollRefs) {
                     scrub: 0.3,
                     end: () => "+=" + (track.scrollWidth - window.innerWidth),
                     invalidateOnRefresh: true,
+                    refreshPriority: 1,
                 },
             });
 
@@ -43,6 +45,32 @@ export function useHorizontalScroll({ tintaVideoRef }: HorizontalScrollRefs) {
                         toggleActions: "play none none reverse",
                     },
                 });
+            });
+
+            gsap.to(".prison-bg", {
+                x: "15%",
+                ease: "none",
+                force3D: true,
+                scrollTrigger: {
+                    trigger: ".seccion-prision",
+                    containerAnimation: horizontalTween,
+                    start: "left right",
+                    end: "right left",
+                    scrub: true,
+                },
+            });
+
+            gsap.to(".prison-fg", {
+                x: "-40%",
+                ease: "none",
+                force3D: true,
+                scrollTrigger: {
+                    trigger: ".seccion-prision",
+                    containerAnimation: horizontalTween,
+                    start: "left right",
+                    end: "right left",
+                    scrub: true,
+                },
             });
 
             ScrollTrigger.create({

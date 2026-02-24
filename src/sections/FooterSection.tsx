@@ -21,7 +21,7 @@ export const FooterSection = memo(function FooterSection() {
         <p className="text-[0.6rem] uppercase tracking-[0.6em] text-red-900/50 mb-8">
           Carta encontrada bajo la puerta, Hab. 312
         </p>
-        <h2 className="text-3xl xl:text-5xl font-black tracking-[0.25em] uppercase text-white/70 leading-tight">
+        <h2 className="text-2xl md:text-3xl xl:text-5xl font-black tracking-[0.25em] uppercase text-white/70 leading-tight">
           Encuéntrame
           <br />
           <span className="font-normal italic text-white/40">en la niebla</span>

@@ -9,6 +9,8 @@ import { IntroSection } from "./sections/IntroSection";
 import { CharacterGrid } from "./sections/CharacterGrid";
 import { HorizontalScroll } from "./sections/HorizontalScroll";
 import { FooterSection } from "./sections/FooterSection";
+import { LoreCards } from "./sections/LoreCards";
+import { BestiarySection } from "./sections/BestiarySection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,8 +28,13 @@ function App() {
       lenis.raf(time * 1000);
     });
     gsap.ticker.lagSmoothing(0);
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
     return () => {
       lenis.destroy();
+      clearTimeout(timer);
     };
   }, []);
 
@@ -78,6 +85,8 @@ function App() {
         heroTitleRef={heroTitleRef}
         tintaVideoRef={tintaVideoRef}
       />
+      <LoreCards />
+      <BestiarySection />
       <FooterSection />
     </div>
   );

@@ -10,14 +10,14 @@ export const IntroSection = memo(function IntroSection() {
         <p className="text-[0.55rem] uppercase tracking-[0.7em] text-red-900/60 mb-10">
           Silent Hill Tribute
         </p>
-        <p className="text-lg xl:text-2xl italic text-white/60 leading-relaxed tracking-wide">
+        <p className="text-base xl:text-2xl italic text-white/60 leading-relaxed tracking-wide">
           "In my restless dreams,
         </p>
         <p className="text-lg xl:text-2xl italic text-white/60 leading-relaxed tracking-wide">
           I see that town."
         </p>
         <div className="mt-8 w-12 h-px bg-red-900/40" />
-        <h1 className="mt-8 text-[4rem] xl:text-[8rem] font-black tracking-[0.5em] uppercase leading-none text-white/90">
+        <h1 className="mt-8 text-[3rem] md:text-[4rem] xl:text-[8rem] font-black tracking-[0.5em] uppercase leading-none text-white/90">
           Silent Hill
         </h1>
         <p className="mt-10 text-xs tracking-[0.3em] text-white/45 uppercase">
