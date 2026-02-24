@@ -43,7 +43,6 @@ export const HorizontalScroll = memo(function HorizontalScroll({
 
   return (
     <>
-      {/* ── DESKTOP: horizontal GSAP scroll ── */}
       <div
         ref={containerRef}
         className="hidden md:block relative h-screen w-full overflow-hidden"
@@ -138,7 +137,6 @@ export const HorizontalScroll = memo(function HorizontalScroll({
         </div>
       </div>
 
-      {/* ── MOBILE: vertical stack ── */}
       <div className="md:hidden flex flex-col">
         <div className="seccion-hero relative h-screen flex items-center bg-black overflow-hidden">
           <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />

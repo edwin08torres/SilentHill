@@ -35,7 +35,6 @@ export const LoreCards = memo(function LoreCards() {
     const cards = gsap.utils.toArray<HTMLElement>(".lore-card");
 
     if (!section || !wrapper || cards.length === 0) return;
-    if (window.innerWidth < 768) return;
 
     const ctx = gsap.context(() => {
       gsap.set(cards[1], { yPercent: 100, autoAlpha: 1 });
