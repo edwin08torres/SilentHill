@@ -11,6 +11,7 @@ import { HorizontalScroll } from "./sections/HorizontalScroll";
 import { FooterSection } from "./sections/FooterSection";
 import { LoreCards } from "./sections/LoreCards";
 import { BestiarySection } from "./sections/BestiarySection";
+import { ZoomTransition } from "./sections/ZoomTransition";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,6 +88,7 @@ function App() {
       />
       <LoreCards />
       <BestiarySection />
+      <ZoomTransition />
       <FooterSection />
     </div>
   );
