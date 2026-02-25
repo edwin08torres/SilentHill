@@ -110,7 +110,7 @@ function TiltCard({
   );
 }
 
-function MobileCarousel({ onHover }: { onHover?: () => void }) {
+function MobileCarousel() {
   const [active, setActive] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef(0);
@@ -140,8 +140,6 @@ function MobileCarousel({ onHover }: { onHover?: () => void }) {
     if (touchDeltaX.current < -50) goTo(active + 1);
     else if (touchDeltaX.current > 50) goTo(active - 1);
   };
-
-  const char = characters[active];
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -254,7 +252,7 @@ export const CharacterGrid = memo(function CharacterGrid({
 
       {/* mobile: swipeable carousel */}
       <div className="md:hidden w-full mt-10 z-10">
-        <MobileCarousel onHover={onHover} />
+        <MobileCarousel />
       </div>
     </section>
   );
