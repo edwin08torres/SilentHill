@@ -16,7 +16,7 @@ export const ZoomTransition = memo(function ZoomTransition() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=200%",
+          end: `+=${window.innerWidth < 768 ? 120 : 200}%`,
           scrub: 1,
           pin: true,
         },

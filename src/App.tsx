@@ -1,11 +1,14 @@
 import { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Lenis from "lenis";
 import { useHorizontalScroll } from "./hooks/useHorizontalScroll";
 import { useCustomCursor } from "./hooks/useCustomCursor";
 import { useAudio } from "./hooks/useAudio";
 import { AudioToggle } from "./components/AudioToggle";
+import { ScrollProgress } from "./components/ScrollProgress";
+import { SectionNav } from "./components/SectionNav";
 import { CinematicPreloader } from "./components/CinematicPreloader";
 import { IntroSection } from "./sections/IntroSection";
 import { CharacterGrid } from "./sections/CharacterGrid";
@@ -15,7 +18,7 @@ import { LoreCards } from "./sections/LoreCards";
 import { BestiarySection } from "./sections/BestiarySection";
 import { ZoomTransition } from "./sections/ZoomTransition";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function App() {
   const tintaVideoRef = useRef<HTMLVideoElement>(null);
@@ -54,6 +57,8 @@ function App() {
         className="hidden md:block fixed top-0 left-0 w-8 h-8 bg-white rounded-full pointer-events-none z-100"
       />
       <AudioToggle isPlaying={isPlaying} onToggle={toggle} />
+      <ScrollProgress />
+      <SectionNav />
 
       <video
         src="/humo.mp4"
@@ -65,18 +70,32 @@ function App() {
       />
       <div className="fixed inset-0 z-40 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
 
-      <IntroSection />
-      <CharacterGrid onHover={playHover} />
-      <HorizontalScroll
-        containerRef={containerRef}
-        trackRef={trackRef}
-        heroTitleRef={heroTitleRef}
-        tintaVideoRef={tintaVideoRef}
-      />
-      <LoreCards />
-      <BestiarySection />
-      <ZoomTransition />
-      <FooterSection />
+      <div data-section>
+        <IntroSection />
+      </div>
+      <div data-section>
+        <CharacterGrid onHover={playHover} />
+      </div>
+      <div data-section>
+        <HorizontalScroll
+          containerRef={containerRef}
+          trackRef={trackRef}
+          heroTitleRef={heroTitleRef}
+          tintaVideoRef={tintaVideoRef}
+        />
+      </div>
+      <div data-section>
+        <LoreCards />
+      </div>
+      <div data-section>
+        <BestiarySection />
+      </div>
+      <div data-section>
+        <ZoomTransition />
+      </div>
+      <div data-section>
+        <FooterSection />
+      </div>
     </div>
   );
 }

@@ -33,8 +33,32 @@ export const LoreCards = memo(function LoreCards() {
     const section = sectionRef.current;
     const wrapper = cardsWrapperRef.current;
     const cards = gsap.utils.toArray<HTMLElement>(".lore-card");
+    const isMobile = window.innerWidth < 768;
 
     if (!section || !wrapper || cards.length === 0) return;
+
+    if (isMobile) {
+      const ctx = gsap.context(() => {
+        cards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { opacity: 0, y: 40 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
+        });
+      }, section);
+      return () => ctx.revert();
+    }
 
     const ctx = gsap.context(() => {
       gsap.set(cards[1], { yPercent: 100, autoAlpha: 1 });
@@ -56,34 +80,19 @@ export const LoreCards = memo(function LoreCards() {
 
       tl.to(cards[1], { yPercent: 0, ease: "none" }, 0).to(
         cards[0],
-        {
-          scale: 0.9,
-          y: -20,
-          filter: "brightness(0.3)",
-          ease: "none",
-        },
+        { scale: 0.9, y: -20, filter: "brightness(0.3)", ease: "none" },
         0,
       );
 
       tl.to(cards[2], { yPercent: 0, ease: "none" }, 1)
         .to(
           cards[1],
-          {
-            scale: 0.94,
-            y: -10,
-            filter: "brightness(0.4)",
-            ease: "none",
-          },
+          { scale: 0.94, y: -10, filter: "brightness(0.4)", ease: "none" },
           1,
         )
         .to(
           cards[0],
-          {
-            scale: 0.82,
-            y: -40,
-            filter: "brightness(0.1)",
-            ease: "none",
-          },
+          { scale: 0.82, y: -40, filter: "brightness(0.1)", ease: "none" },
           1,
         );
     }, section);
@@ -94,9 +103,9 @@ export const LoreCards = memo(function LoreCards() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#030303] h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative w-full bg-[#030303] md:h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      <div className="absolute top-16 left-1/2 -translate-x-1/2 text-center z-0 w-full pointer-events-none">
+      <div className="py-12 md:py-0 md:absolute md:top-16 left-1/2 md:-translate-x-1/2 text-center z-0 w-full pointer-events-none">
         <p className="text-[0.65rem] uppercase tracking-[0.6em] text-red-800/60 font-bold mb-4">
           Fragmentos
         </p>
@@ -105,9 +114,10 @@ export const LoreCards = memo(function LoreCards() {
         </h2>
       </div>
 
+      {/* desktop: stacked cards */}
       <div
         ref={cardsWrapperRef}
-        className="relative w-[90vw] max-w-5xl h-[60vh] md:h-[70vh] mt-16 overflow-hidden rounded-[2rem]"
+        className="hidden md:block relative w-[90vw] max-w-5xl h-[70vh] mt-16 overflow-hidden rounded-[2rem]"
       >
         {CARDS.map((card, i) => (
           <div
@@ -115,12 +125,12 @@ export const LoreCards = memo(function LoreCards() {
             className={`lore-card absolute inset-0 w-full h-full border border-white/10 ${card.bg} shadow-[0_-30px_60px_rgba(0,0,0,0.9)] will-change-transform`}
             style={{ zIndex: i + 1 }}
           >
-            <div className="absolute bottom-0 left-0 w-full p-10 xl:p-16 flex flex-col justify-end bg-gradient-to-t from-black via-black/60 to-transparent h-full">
+            <div className="absolute bottom-0 left-0 w-full p-16 flex flex-col justify-end bg-gradient-to-t from-black via-black/60 to-transparent h-full">
               <div className="w-10 h-px bg-red-900/40 mb-5" />
-              <h3 className="text-2xl md:text-3xl xl:text-5xl font-black tracking-widest text-white/90 uppercase mb-3 md:mb-5">
+              <h3 className="text-3xl xl:text-5xl font-black tracking-widest text-white/90 uppercase mb-5">
                 {card.title}
               </h3>
-              <p className="text-xs md:text-sm xl:text-base text-white/40 max-w-lg leading-relaxed tracking-wide italic">
+              <p className="text-sm xl:text-base text-white/40 max-w-lg leading-relaxed tracking-wide italic">
                 {card.description}
               </p>
             </div>
@@ -128,7 +138,25 @@ export const LoreCards = memo(function LoreCards() {
         ))}
       </div>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none animate-pulse">
+      {/* mobile: vertical cards */}
+      <div className="md:hidden flex flex-col gap-6 px-6 pb-12 w-full">
+        {CARDS.map((card) => (
+          <div
+            key={card.title}
+            className={`lore-card rounded-2xl border border-white/10 ${card.bg} p-6 shadow-[0_10px_40px_rgba(0,0,0,0.6)]`}
+          >
+            <div className="w-8 h-px bg-red-900/40 mb-4" />
+            <h3 className="text-xl font-black tracking-widest text-white/90 uppercase mb-3">
+              {card.title}
+            </h3>
+            <p className="text-xs text-white/40 leading-relaxed tracking-wide italic">
+              {card.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2 pointer-events-none animate-pulse">
         <p className="text-[0.5rem] uppercase tracking-[0.5em] text-white/20">
           Scroll
         </p>

@@ -10,6 +10,7 @@ export const CinematicPreloader = memo(function CinematicPreloader({
   heroTitleRef,
 }: CinematicPreloaderProps) {
   const preloaderRef = useRef<HTMLDivElement>(null);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     const preloader = preloaderRef.current;
@@ -23,10 +24,22 @@ export const CinematicPreloader = memo(function CinematicPreloader({
       ".pl-subtitle",
       ".pl-bar-fill",
       ".pl-bar-track",
+      ".pl-skip",
     ];
     targets.forEach((t) => gsap.set(t, { clearProps: "all" }));
 
+    const dismiss = () => {
+      gsap.set(preloader, { display: "none", opacity: 0 });
+      gsap.fromTo(
+        heroTitleRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 2, ease: "power3.out" },
+      );
+      ScrollTrigger.refresh();
+    };
+
     const tl = gsap.timeline({ delay: 0.3 });
+    tlRef.current = tl;
 
     tl.fromTo(
       ".pl-top-line, .pl-bottom-line",
@@ -98,15 +111,7 @@ export const CinematicPreloader = memo(function CinematicPreloader({
         opacity: 0,
         duration: 0.6,
         ease: "power2.inOut",
-        onComplete: () => {
-          gsap.set(preloader, { display: "none" });
-          gsap.fromTo(
-            heroTitleRef.current,
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 2, ease: "power3.out" },
-          );
-          ScrollTrigger.refresh();
-        },
+        onComplete: dismiss,
       },
       "-=0.1",
     );
@@ -116,6 +121,26 @@ export const CinematicPreloader = memo(function CinematicPreloader({
       targets.forEach((t) => gsap.set(t, { clearProps: "all" }));
     };
   }, [heroTitleRef]);
+
+  const handleSkip = () => {
+    if (tlRef.current) tlRef.current.kill();
+    const preloader = preloaderRef.current;
+    if (!preloader) return;
+    gsap.to(preloader, {
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.in",
+      onComplete: () => {
+        gsap.set(preloader, { display: "none" });
+        gsap.fromTo(
+          heroTitleRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.5, ease: "power3.out" },
+        );
+        ScrollTrigger.refresh();
+      },
+    });
+  };
 
   return (
     <div
@@ -149,6 +174,13 @@ export const CinematicPreloader = memo(function CinematicPreloader({
 
         <div className="pl-bottom-line w-12 h-px bg-red-900/40 mt-1" />
       </div>
+
+      <button
+        onClick={handleSkip}
+        className="pl-skip absolute bottom-10 text-[0.45rem] uppercase tracking-[0.5em] text-white/20 hover:text-white/50 transition-colors duration-300 cursor-pointer"
+      >
+        Skip ›
+      </button>
     </div>
   );
 });

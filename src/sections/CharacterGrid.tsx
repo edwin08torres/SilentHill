@@ -9,10 +9,7 @@ export const CharacterGrid = memo(function CharacterGrid({
   onHover,
 }: CharacterGridProps) {
   return (
-    <section
-      data-flash
-      className="relative w-full min-h-screen bg-[#030303] py-32 z-10 flex flex-col items-center"
-    >
+    <section className="relative w-full min-h-screen bg-[#030303] py-16 md:py-32 z-10 flex flex-col items-center">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(80,0,0,0.06)_0%,transparent_60%)] pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-red-900/20" />
 

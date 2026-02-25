@@ -138,7 +138,7 @@ export const HorizontalScroll = memo(function HorizontalScroll({
       </div>
 
       <div className="md:hidden flex flex-col">
-        <div className="seccion-hero relative h-screen flex items-center bg-black overflow-hidden">
+        <div className="seccion-hero relative h-[70vh] flex items-center bg-black overflow-hidden">
           <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
           <div className="relative z-10 flex flex-col justify-center px-8 pt-16">
             <h1 className="text-[5rem] font-black tracking-[0.15em] uppercase leading-[0.85] text-white/90">
@@ -156,7 +156,7 @@ export const HorizontalScroll = memo(function HorizontalScroll({
         {mobileSections.map((sec) => (
           <div
             key={sec.label}
-            className="relative min-h-screen flex flex-col items-center justify-center px-8 py-24 bg-[#030303]"
+            className="relative min-h-[70vh] flex flex-col items-center justify-center px-8 py-12 bg-[#030303]"
           >
             {sec.image && (
               <img
@@ -180,7 +180,7 @@ export const HorizontalScroll = memo(function HorizontalScroll({
           </div>
         ))}
 
-        <div className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+        <div className="relative min-h-[60vh] flex items-center justify-center bg-black overflow-hidden">
           <h2 className="text-[4rem] font-black uppercase leading-[0.8] text-red-700 tracking-widest text-center">
             La
             <br />
