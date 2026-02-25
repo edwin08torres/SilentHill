@@ -1,9 +1,18 @@
 import { memo } from "react";
 import { characters } from "../data/characters";
 
-export const CharacterGrid = memo(function CharacterGrid() {
+interface CharacterGridProps {
+  onHover?: () => void;
+}
+
+export const CharacterGrid = memo(function CharacterGrid({
+  onHover,
+}: CharacterGridProps) {
   return (
-    <section className="relative w-full min-h-screen bg-[#030303] py-32 z-10 flex flex-col items-center">
+    <section
+      data-flash
+      className="relative w-full min-h-screen bg-[#030303] py-32 z-10 flex flex-col items-center"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(80,0,0,0.06)_0%,transparent_60%)] pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-red-900/20" />
 
@@ -25,7 +34,11 @@ export const CharacterGrid = memo(function CharacterGrid() {
 
       <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-0 w-full max-w-[90vw] mt-16 z-10">
         {characters.map((char, index) => (
-          <div key={char.name} className="group relative cursor-pointer">
+          <div
+            key={char.name}
+            className="group relative cursor-pointer"
+            onMouseEnter={onHover}
+          >
             <div className="relative w-full aspect-[3/4.5] overflow-hidden">
               <img
                 src={char.image}
