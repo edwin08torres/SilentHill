@@ -7,6 +7,7 @@ export function useCustomCursor() {
     useLayoutEffect(() => {
         const cursor = cursorRef.current;
         if (!cursor) return;
+        if (window.innerWidth < 768) return;
 
         gsap.set(cursor, { xPercent: -50, yPercent: -50 });
 

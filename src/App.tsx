@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div
-      className="overflow-x-hidden bg-[#030303] text-white cursor-none"
+      className="overflow-x-hidden bg-[#030303] text-white md:cursor-none"
       style={{ fontFamily: "'Cinzel', Georgia, serif" }}
     >
       <div
@@ -65,7 +65,7 @@ function App() {
 
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-8 h-8 bg-white rounded-full pointer-events-none z-100"
+        className="hidden md:block fixed top-0 left-0 w-8 h-8 bg-white rounded-full pointer-events-none z-100"
       />
 
       <video
@@ -74,9 +74,9 @@ function App() {
         loop
         muted
         playsInline
-        className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none opacity-15 z-50"
+        className="hidden md:block fixed top-0 left-0 w-full h-full object-cover pointer-events-none opacity-[8%] z-50"
       />
-      <div className="fixed inset-0 z-40 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.9)_100%)]" />
+      <div className="fixed inset-0 z-40 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
 
       <IntroSection />
       <CharacterGrid />

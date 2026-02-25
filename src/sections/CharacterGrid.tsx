@@ -23,7 +23,7 @@ export const CharacterGrid = memo(function CharacterGrid() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-0 w-full max-w-[90vw] mt-16 z-10">
+      <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-0 w-full max-w-[90vw] mt-16 z-10">
         {characters.map((char, index) => (
           <div key={char.name} className="group relative cursor-pointer">
             <div className="relative w-full aspect-[3/4.5] overflow-hidden">
@@ -54,8 +54,8 @@ export const CharacterGrid = memo(function CharacterGrid() {
                 <h3 className="text-xl font-black tracking-[0.15em] uppercase text-white/90 group-hover:text-white transition-colors duration-500">
                   {char.name}
                 </h3>
-                <div className="mt-3 w-0 h-px bg-red-800/50 group-hover:w-full transition-all duration-700 ease-out" />
-                <p className="text-[0.75rem] text-white/40 mt-3 leading-relaxed italic translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100 tracking-wide">
+                <div className="mt-3 w-full md:w-0 h-px bg-red-800/50 md:group-hover:w-full transition-all duration-700 ease-out" />
+                <p className="text-[0.65rem] md:text-[0.75rem] text-white/40 mt-3 leading-relaxed italic translate-y-0 opacity-100 md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-500 delay-100 tracking-wide">
                   "{char.description}"
                 </p>
               </div>

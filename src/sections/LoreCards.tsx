@@ -127,6 +127,13 @@ export const LoreCards = memo(function LoreCards() {
           </div>
         ))}
       </div>
+
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none animate-pulse">
+        <p className="text-[0.5rem] uppercase tracking-[0.5em] text-white/20">
+          Scroll
+        </p>
+        <div className="w-px h-6 bg-white/10" />
+      </div>
     </section>
   );
 });

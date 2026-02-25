@@ -153,7 +153,7 @@ export const BestiarySection = memo(function BestiarySection() {
             alt="Nurse"
             className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-25 pointer-events-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/60 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/60 pointer-events-none" />
 
           <div className="relative z-10 h-full flex flex-col px-8 pt-16">
             <p className="text-[0.6rem] uppercase tracking-[0.6em] text-red-800/60 font-bold mb-3">
@@ -170,18 +170,20 @@ export const BestiarySection = memo(function BestiarySection() {
               {CREATURES.map((creature, i) => (
                 <div
                   key={creature.name}
-                  className="mobile-creature absolute inset-0 flex flex-col justify-end pb-16"
+                  className="mobile-creature absolute inset-x-0 bottom-0 flex flex-col justify-end pb-16"
                 >
-                  <p className="text-[0.6rem] uppercase tracking-[0.5em] text-red-800/40 font-bold mb-4">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="text-xl font-bold tracking-widest text-white/85 uppercase mb-3">
-                    {creature.name}
-                  </h3>
-                  <div className="w-10 h-px bg-red-900/40 mb-4" />
-                  <p className="text-sm text-white/50 leading-relaxed tracking-wide italic max-w-xs">
-                    {creature.description}
-                  </p>
+                  <div className="bg-black/50 backdrop-blur-md rounded-xl p-5 mx-2">
+                    <p className="text-[0.6rem] uppercase tracking-[0.5em] text-red-800/40 font-bold mb-4">
+                      {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <h3 className="text-xl font-bold tracking-widest text-white/85 uppercase mb-3">
+                      {creature.name}
+                    </h3>
+                    <div className="w-10 h-px bg-red-900/40 mb-4" />
+                    <p className="text-sm text-white/50 leading-relaxed tracking-wide italic max-w-xs">
+                      {creature.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
